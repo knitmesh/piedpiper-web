@@ -1,30 +1,25 @@
 sudo: required
 language: python
 services:
-  - docker
+- docker
 python:
-  - "3.6"
+- '3.6'
 before_script:
-  - docker-compose build
+- docker-compose build
 script:
-  - docker-compose run --rm web bash -c "flake8 . &&
-                                         python wait_for_postgres.py &&
-                                         ./manage.py test"
-
+- docker-compose run --rm web bash -c "flake8 . && python wait_for_postgres.py &&
+  ./manage.py test"
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com;
-    docker tag web registry.heroku.com/piedpiper-prod/web;
-    docker push registry.heroku.com/piedpiper-prod/web;
-    fi
-  - if [ "$TRAVIS_BRANCH" == "qa" ]; then
-    docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com;
-    docker tag web registry.heroku.com/piedpiper-qa/web;
-    docker push registry.heroku.com/piedpiper-qa/web;
-    fi
-
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
+  registry.heroku.com; docker tag web registry.heroku.com/piedpiper-prod/web; docker
+  push registry.heroku.com/piedpiper-prod/web; fi
+- if [ "$TRAVIS_BRANCH" == "qa" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
+  registry.heroku.com; docker tag web registry.heroku.com/piedpiper-qa/web; docker
+  push registry.heroku.com/piedpiper-qa/web; fi
 notifications:
   email: false
-
 cache:
   pip: true
+env:
+  global:
+    secure: LJLwwPgGkRny+4IxyUys5vvewcYlbXCjUsjLzLzJ8gIkcNBXtm9v+m1Sa8DU/1RopjN/P8hapg7XQSHOhXxHPn9L1/lf8wFizqLL8QF1KRnMmiwKe49V6EwqVqd54Vr+gt1xRfy+bOGgsZ1t/5dkJg7T+ctz7lpTi3aGozyVAaBtw1U0HdIDA7WMomHK2ndyFMmgnmQ7sMa0kWEtgriD3Gar9EF/WvceNsY2L7zo7ATbTBk6WngBMbDMc9GGPX9jJVo8IdewsmK0TyizdbX4wLDUiv3fwHp84HBlEi/jWtvFZhtvLibfHNrtCzrKSVNcDTvjY+1dKMlMQIeP8Pjd2bCewCdkr1aPVBuLpX6q/bzUxORmomaLNXBx8M1W67BHfwvm4ZGLZbEyEISwBdC7mXzDfm2l4j5PbAtz5VSv/ryArJ7wRkwdUNSCY0jWTDwfSFKNUCFs8WP2Pkebh3RW1KwiLqkjZyaIPwMSRjGHdAV/K+Ww9WVMuVingGPv4O6E6sWFWV9Tjas51vHqgLBd2JXiV9+KXcRFIqYAY0+pjqZkR1fhadctxAUTzbTcnAhzIrNS9fhaQVdsAAXt476cy7eFFFGGAUVgEMorxP6LBUqJWkwD79SV3VmW21k2fBEwJkVxgERi3Ij3D1HUEJdTG8yY7CZ13SludDPXnTyodTA=
