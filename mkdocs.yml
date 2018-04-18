@@ -1,0 +1,12 @@
+site_name: piedpiper
+site_description: piedpiper-web
+repo_url: https://github.com/knitmesh/piedpiper-web
+site_dir: site
+copyright: Copyright &copy; 2018, <a href="https://github.com/knitmesh">knitmesh</a>.
+dev_addr: 0.0.0.0:8001
+
+pages:
+  - Home: 'index.md'
+  - API:
+    - Authentication: 'api/authentication.md'
+    - Users: 'api/users.md'
