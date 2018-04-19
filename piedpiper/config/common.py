@@ -36,6 +36,7 @@ class Common(Configuration):
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
     )
 
     ALLOWED_HOSTS = ["*"]
@@ -53,7 +54,7 @@ class Common(Configuration):
     # Postgres
     DATABASES = {
         'default': dj_database_url.config(
-            default='postgres://postgres:@postgres:5432/postgres',
+            default='postgres://nfmunrmfvibwrb:2c554eba38827840333e488737a41dbda2c71d0263b1963366073ae71f1f5219@ec2-174-129-41-64.compute-1.amazonaws.com:5432/d9vki3d83u50ab',
             conn_max_age=int(os.getenv('POSTGRES_CONN_MAX_AGE', 600))
         )
     }
@@ -72,9 +73,7 @@ class Common(Configuration):
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/2.0/howto/static-files/
     STATIC_ROOT = os.path.normpath(join(os.path.dirname(BASE_DIR), 'static'))
-    STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+    STATICFILES_DIRS = []
     STATIC_URL = '/static/'
     STATICFILES_FINDERS = (
         'django.contrib.staticfiles.finders.FileSystemFinder',
