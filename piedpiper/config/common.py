@@ -36,11 +36,12 @@ class Common(Configuration):
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
     )
 
     ALLOWED_HOSTS = ["*"]
     ROOT_URLCONF = 'piedpiper.urls'
-    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'jvfpVuwuBeG6z76JghuLxGmZJarsoCC04p3HIsj0Y70')
+    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
     WSGI_APPLICATION = 'piedpiper.wsgi.application'
 
     # Email
