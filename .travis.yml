@@ -15,7 +15,7 @@ after_success:
   push registry.heroku.com/piedpiper-prod/web; fi
 - if [ "$TRAVIS_BRANCH" == "qa" ]; then docker login --username=_ --password="$HEROKU_AUTH_TOKEN"
   registry.heroku.com; docker tag web registry.heroku.com/piedpiper-qa/web; docker
-  push registry.heroku.com/piedpiper-qa/web; fi
+  push registry.heroku.com/piedpiper-web/web; fi
 notifications:
   email: false
 cache:
